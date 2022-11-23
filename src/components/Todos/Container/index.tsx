@@ -1,8 +1,6 @@
 import styled from "@emotion/styled";
-import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
-import useStore from "../../../store";
 import TodoMaker from "../TodoMaker";
 import TodoTotalList from "../TodoTotalList";
 
@@ -25,21 +23,12 @@ const Title = styled.div`
   color: #ea3232;
 `;
 
-function TodoContainer() {
-  const { todosState } = useStore();
-
+export default function TodoContainer() {
   const handlePageMove = () => {
     console.log("page move");
   };
 
-  useEffect(() => {
-    todosState.handleMakeNewList({
-      id: 2,
-      date: "2022.11.23",
-      title: "testing",
-    });
-    console.log(toJS(todosState.havingTodoList));
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <TotalContainer>
@@ -49,5 +38,3 @@ function TodoContainer() {
     </TotalContainer>
   );
 }
-
-export default observer(TodoContainer);

@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { action, makeAutoObservable, makeObservable, observable } from "mobx";
 
 export interface TodoList {
@@ -17,8 +18,12 @@ export class Todos {
     });
   }
 
-  handleMakeNewList({ id, date, title }: TodoList) {
-    const newList = { id, date, title };
+  handleMakeNewList(title: string) {
+    const newList = {
+      id: this.havingTodoList.length + 1,
+      date: dayjs().format("YYYY-MM-DD HH:mm:ss"),
+      title,
+    };
 
     this.havingTodoList.push(newList);
   }
