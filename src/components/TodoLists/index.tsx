@@ -4,8 +4,13 @@ import TodoTotalList from "./TodoTotalList";
 import useStore from "../../store";
 import { observer } from "mobx-react-lite";
 import ActiveDelete from "./ActiveDelete";
+import { useEffect } from "react";
 
-const TotalContainer = styled.div`
+interface TotalContainerProps {
+  entertodos: number;
+}
+
+const TotalContainer = styled.div<TotalContainerProps>`
   position: relative;
   width: 40%;
   height: 60%;
@@ -15,6 +20,11 @@ const TotalContainer = styled.div`
   background-color: #fff;
   border-radius: 15px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transition: 1.2s;
+  transform: ${({ entertodos }) => {
+    return entertodos ? "translateX(-180%)" : "translate(0%)";
+  }};
+  z-index: 2;
 `;
 
 const Title = styled.div`
@@ -25,19 +35,22 @@ const Title = styled.div`
 `;
 
 function TodoContainer() {
-  const { todosState, activeDeleteState } = useStore();
-  const { havingTodoList } = todosState;
-  const { handleActiveDelete } = activeDeleteState;
+  const { todosState } = useStore();
+  const { enterTodos, havingTodoList, activeDelete, handleActiveDelete } =
+    todosState;
 
-  const handlePageMove = () => {
-    console.log("page move");
-  };
+  useEffect(() => {
+    if (todosState.havingTodoList.length === 0) {
+      todosState.handleActiveDeleteFalse();
+    }
+  }, [todosState.havingTodoList.length]);
 
   return (
-    <TotalContainer>
+    <TotalContainer entertodos={enterTodos}>
       <Title>MAKE YOUR OWN BUSINESS TO-DO LIST</Title>
       <TodoMaker />
       <ActiveDelete
+        activeDelete={activeDelete}
         handleActiveDelete={handleActiveDelete}
         havingTodoList={havingTodoList}
       />

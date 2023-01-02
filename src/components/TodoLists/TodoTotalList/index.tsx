@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { observer } from "mobx-react-lite";
+import { useState } from "react";
 import useStore from "../../../store";
 import TodoMove from "../TodoMove";
 
@@ -11,9 +12,14 @@ const TotalContainer = styled.div`
 `;
 
 function TodoTotalList() {
-  const { todosState, activeDeleteState } = useStore();
-  const { havingTodoList } = todosState;
-  const { activeDelete } = activeDeleteState;
+  const [open, setOpen] = useState(false);
+  const { todosState } = useStore();
+  const { activeDelete, havingTodoList, handleDeleteList, handleEnterTodo } =
+    todosState;
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const handlePageMove = (id: number) => handleEnterTodo(id);
 
   return (
     <TotalContainer>
@@ -24,6 +30,11 @@ function TodoTotalList() {
             id={id}
             title={title}
             date={date}
+            open={open}
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+            handleDelete={handleDeleteList}
+            handlePageMove={handlePageMove}
             activeDelete={activeDelete}
           />
         );

@@ -15,7 +15,7 @@ function App() {
   return (
     <AppContainer>
       <TodoContainer />
-      {/* <Todo /> */}
+      <Todo />
     </AppContainer>
   );
 }

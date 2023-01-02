@@ -1,5 +1,4 @@
 import { todosState } from "./todos";
-import { activeDeleteState } from "./activeDelete";
 
-const useStore = () => ({ todosState, activeDeleteState });
+const useStore = () => ({ todosState });
 export default useStore;
