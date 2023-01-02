@@ -19,6 +19,8 @@ export class Todos {
   }
 
   handleMakeNewList(title: string) {
+    console.log(title);
+
     const newList = {
       id: this.havingTodoList.length + 1,
       date: dayjs().format("YYYY-MM-DD HH:mm:ss"),
