@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
-import { Button } from "@mui/material";
+import { Button, Modal, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import { useState } from "react";
+import TodoListMakeModal from "../TodoListMakeModal";
 
-const TotalContainer = styled(Button)`
+const MakeButtonContainer = styled(Button)`
   width: 100%;
   height: 10%;
   display: flex;
@@ -30,10 +32,17 @@ const Icon = styled(AddIcon)`
 `;
 
 export default function TodoMaker() {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
-    <TotalContainer variant="outlined">
-      Make Business
-      <Icon></Icon>
-    </TotalContainer>
+    <>
+      <TodoListMakeModal open={open} handleClose={handleClose} />
+      <MakeButtonContainer variant="outlined" onClick={handleOpen}>
+        Make Business
+        <Icon></Icon>
+      </MakeButtonContainer>
+    </>
   );
 }

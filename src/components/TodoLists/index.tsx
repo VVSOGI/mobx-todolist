@@ -1,13 +1,12 @@
 import styled from "@emotion/styled";
-import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
-import TodoMaker from "../TodoMaker";
-import TodoTotalList from "../TodoTotalList";
+import TodoMaker from "./TodoMaker";
+import TodoTotalList from "./TodoTotalList";
 
 const TotalContainer = styled.div`
   position: relative;
-  width: 50%;
-  height: 70%;
+  width: 40%;
+  height: 60%;
   display: flex;
   flex-direction: column;
   padding: 2rem;

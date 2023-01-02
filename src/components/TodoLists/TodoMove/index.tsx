@@ -1,9 +1,5 @@
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
-import dayjs from "dayjs";
-import { toJS } from "mobx";
-import { useEffect } from "react";
-import useStore from "../../../store";
 
 const MoveTodoPage = styled(Button)`
   width: 100%;
@@ -36,18 +32,8 @@ interface Props {
 }
 
 export default function TodoMove({ id, title, date }: Props) {
-  const { todosState } = useStore();
-
-  const handleClick = () => {
-    todosState.handleMakeNewList("다운 풀 블루");
-  };
-
-  useEffect(() => {
-    console.log(toJS(todosState.havingTodoList));
-  }, [todosState.havingTodoList]);
-
   return (
-    <MoveTodoPage onClick={handleClick}>
+    <MoveTodoPage>
       {title}
       <MoveTodoPageDate>
         <span id="lastFixed">최종 수정일</span>

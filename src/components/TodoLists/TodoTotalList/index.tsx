@@ -15,7 +15,6 @@ function TodoTotalList() {
 
   return (
     <TotalContainer>
-      <TodoMove id={1} title="choose me plz" date="2022.10.29" />
       {todosState.havingTodoList.map(({ id, date, title }) => {
         return <TodoMove key={id} id={id} title={title} date={date} />;
       })}

@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import TodoContainer from "./components/Todos/Container";
+import TodoContainer from "./components/TodoLists";
+import Todo from "./components/Todo";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -14,6 +15,7 @@ function App() {
   return (
     <AppContainer>
       <TodoContainer />
+      {/* <Todo /> */}
     </AppContainer>
   );
 }
