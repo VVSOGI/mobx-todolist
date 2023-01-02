@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Button, Modal } from "@mui/material";
 import { observer } from "mobx-react-lite";
-import { useState } from "react";
+import { TodoList } from "../../../store/todos";
 
 interface MoveTodoPageProps {
   activedelete: boolean;
@@ -46,6 +46,7 @@ const ModalContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 1rem;
   transform: translate(-50%, -50%);
   background-color: #fff;
   border-radius: 3px;
@@ -53,7 +54,7 @@ const ModalContainer = styled.div`
 `;
 
 const ModalSpan = styled.span`
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 600;
   text-align: center;
 `;
@@ -73,19 +74,29 @@ interface Props {
   title: string;
   date: string;
   activeDelete: boolean;
+  open: boolean;
+  handleOpen: () => void;
+  handleClose: () => void;
+  handleDelete: (id: number) => TodoList[];
+  handlePageMove: (id: number) => number;
 }
 
-function TodoMove({ id, title, date, activeDelete }: Props) {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const handlePageMove = () => console.log("pagemove");
-
+function TodoMove({
+  id,
+  title,
+  date,
+  activeDelete,
+  open,
+  handleOpen,
+  handleClose,
+  handleDelete,
+  handlePageMove,
+}: Props) {
   return (
     <>
       <MoveTodoPage
         onClick={() => {
-          activeDelete ? handleOpen() : handlePageMove();
+          activeDelete ? handleOpen() : handlePageMove(id);
         }}
         activedelete={activeDelete}
       >
@@ -106,7 +117,10 @@ function TodoMove({ id, title, date, activeDelete }: Props) {
             </ModalSpan>
             <ButtonContainer>
               <Button
-                onClick={handleClose}
+                onClick={() => {
+                  handleClose();
+                  handleDelete(id);
+                }}
                 sx={{ backgroundColor: "#ea3232f6" }}
                 variant="contained"
               >
