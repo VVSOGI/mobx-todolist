@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Button, Modal, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useStore from "../../../store";
 
 const ModalContainer = styled.div`
@@ -73,7 +73,7 @@ export default function TodoListMakeModal({ open, handleClose }: Props) {
         <ModalNextVersionCheck></ModalNextVersionCheck>
         <ModalMakeButtonContainer>
           <ModalMakeButton variant="contained" onClick={handleCreate}>
-            Create
+            Make
           </ModalMakeButton>
         </ModalMakeButtonContainer>
       </ModalContainer>
