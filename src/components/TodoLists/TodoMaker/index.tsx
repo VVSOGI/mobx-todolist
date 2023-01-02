@@ -10,7 +10,7 @@ const MakeButtonContainer = styled(Button)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   border-color: #6d6d6da9;
   color: #21212171;
 

@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { action, makeAutoObservable, makeObservable, observable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 
 export interface TodoList {
   id: number;
@@ -19,8 +19,6 @@ export class Todos {
   }
 
   handleMakeNewList(title: string) {
-    console.log(title);
-
     const newList = {
       id: this.havingTodoList.length + 1,
       date: dayjs().format("YYYY-MM-DD HH:mm:ss"),

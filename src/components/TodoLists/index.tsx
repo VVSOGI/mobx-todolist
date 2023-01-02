@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
-import { useEffect } from "react";
 import TodoMaker from "./TodoMaker";
 import TodoTotalList from "./TodoTotalList";
+import useStore from "../../store";
+import { observer } from "mobx-react-lite";
+import ActiveDelete from "./ActiveDelete";
 
 const TotalContainer = styled.div`
   position: relative;
@@ -22,18 +24,26 @@ const Title = styled.div`
   color: #ea3232;
 `;
 
-export default function TodoContainer() {
+function TodoContainer() {
+  const { todosState, activeDeleteState } = useStore();
+  const { havingTodoList } = todosState;
+  const { handleActiveDelete } = activeDeleteState;
+
   const handlePageMove = () => {
     console.log("page move");
   };
-
-  useEffect(() => {}, []);
 
   return (
     <TotalContainer>
       <Title>MAKE YOUR OWN BUSINESS TO-DO LIST</Title>
       <TodoMaker />
+      <ActiveDelete
+        handleActiveDelete={handleActiveDelete}
+        havingTodoList={havingTodoList}
+      />
       <TodoTotalList />
     </TotalContainer>
   );
 }
+
+export default observer(TodoContainer);

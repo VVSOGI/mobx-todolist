@@ -11,12 +11,22 @@ const TotalContainer = styled.div`
 `;
 
 function TodoTotalList() {
-  const { todosState } = useStore();
+  const { todosState, activeDeleteState } = useStore();
+  const { havingTodoList } = todosState;
+  const { activeDelete } = activeDeleteState;
 
   return (
     <TotalContainer>
-      {todosState.havingTodoList.map(({ id, date, title }) => {
-        return <TodoMove key={id} id={id} title={title} date={date} />;
+      {havingTodoList.map(({ id, date, title }) => {
+        return (
+          <TodoMove
+            key={id}
+            id={id}
+            title={title}
+            date={date}
+            activeDelete={activeDelete}
+          />
+        );
       })}
     </TotalContainer>
   );
