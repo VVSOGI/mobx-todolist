@@ -13,17 +13,22 @@
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.10.14",
     "@mui/material": "^5.10.14",
+    "@types/uuid": "^9.0.0",
     "dayjs": "^1.11.6",
     "mobx": "^6.7.0",
     "mobx-react": "^7.6.0",
     "mobx-react-lite": "^3.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.3"
+    "react-router-dom": "^6.4.3",
+    "react-sortablejs": "^6.1.4",
+    "sortablejs": "^1.15.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
+    "@types/sortablejs": "^1.15.0",
     "@vitejs/plugin-react": "^2.2.0",
     "typescript": "^4.6.4",
     "vite": "^3.2.3"
