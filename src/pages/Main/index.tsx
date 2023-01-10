@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
-import TodoContainer from "./components/TodoLists";
-import Todo from "./components/Todo";
+import TodoContainer from "/src/components/TodoLists";
+import Todo from "/src/components/Todo";
 
-const AppContainer = styled.div`
+const TotalContainer = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
@@ -11,13 +11,13 @@ const AppContainer = styled.div`
   background-color: #d7dce6;
 `;
 
-function App() {
+function Main() {
   return (
-    <AppContainer>
+    <TotalContainer>
       <TodoContainer />
       <Todo />
-    </AppContainer>
+    </TotalContainer>
   );
 }
 
-export default App;
+export default Main;
