@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import styled from "@emotion/styled";
-import { TodoList } from "../../../store/todos";
+import { GoalsType } from "../../../store/goals";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
 
@@ -22,18 +22,18 @@ const DeleteActive = styled.div`
 
 interface Props {
   activeDelete: boolean;
-  havingTodoList: TodoList[];
+  havingGoals: GoalsType[];
   handleActiveDelete: () => boolean;
 }
 
 function ActiveDelete({
   activeDelete,
   handleActiveDelete,
-  havingTodoList,
+  havingGoals,
 }: Props) {
   return (
     <>
-      {havingTodoList.length > 0 ? (
+      {havingGoals.length > 0 ? (
         <DeleteActive onClick={() => handleActiveDelete()}>
           {!activeDelete ? <DeleteIcon /> : <CheckIcon />}
         </DeleteActive>

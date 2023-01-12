@@ -1,6 +1,8 @@
 import { Colors, TodoContentType } from "/src/types";
 import { action, makeObservable, observable, runInAction } from "mobx";
 import { v4 } from "uuid";
+import axios from "axios";
+import { getCookie } from "../utils/cookies";
 
 const mock: TodoContentType[] = [
   {

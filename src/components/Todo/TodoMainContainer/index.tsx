@@ -6,6 +6,7 @@ import TodoContent from "./TodoContent";
 import { ReactSortable } from "react-sortablejs";
 import { forwardRef, useEffect, useState } from "react";
 import { toJS } from "mobx";
+import { getCookie } from "/src/utils/cookies";
 
 const MainContainer = styled.div`
   flex: 3;
@@ -55,6 +56,7 @@ function TodoMainContainer() {
         {todos.map((data) => {
           return (
             <TodoContent
+              key={data.id}
               id={data.id}
               color={data.color || "#ea3232"}
               todoText={data.todoText}

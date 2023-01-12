@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
+import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import { todosState } from "../../store/todos";
+import { GoalsState } from "../../store/goals";
 import Title from "./Title";
 import TodoMainContainer from "./TodoMainContainer";
 import TodoSubContainer from "./TodoSubContainer";
@@ -36,7 +37,7 @@ const Main = styled.div`
 
 function Todo() {
   const [loading, setLoading] = useState(false);
-  const { enterTodos, choiceTodo, handleExitTodo } = todosState;
+  const { enterGoal, choiceGoals, handleExitTodo } = GoalsState;
   const { todos } = TodoState;
 
   useEffect(() => {
@@ -45,18 +46,18 @@ function Todo() {
   }, [todos.length]);
 
   useEffect(() => {
-    if (enterTodos) {
+    if (enterGoal) {
       setTimeout(() => {
         setLoading(true);
       }, 1000);
     } else {
       setLoading(false);
     }
-  }, [enterTodos]);
+  }, [enterGoal]);
 
   return (
     <TotalContainer loading={loading}>
-      <Title choiceTodo={choiceTodo} handleExitTodo={handleExitTodo} />
+      <Title choiceGoals={choiceGoals} handleExitTodo={handleExitTodo} />
       <Main>
         <TodoMainContainer />
         <TodoSubContainer />

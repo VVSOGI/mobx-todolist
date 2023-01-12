@@ -17,7 +17,7 @@ const RightContainer = styled.div`
 `;
 
 function LoginRight() {
-  const { isLogin, handleUserSignIn, handleUserSignUp } = UsersState;
+  const { handleCheckToken, handleUserSignIn, handleUserSignUp } = UsersState;
 
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -61,8 +61,8 @@ function LoginRight() {
   };
 
   useEffect(() => {
-    console.log(isLogin);
-  }, [isLogin]);
+    handleCheckToken(navigate);
+  }, []);
 
   useEffect(() => {
     if (checkAccess) {

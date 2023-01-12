@@ -1,5 +1,5 @@
 import { TodoState } from "./todo";
-import { todosState } from "./todos";
+import { GoalsState } from "./goals";
 
-const useStore = () => ({ todosState, TodoState });
+const useStore = () => ({ GoalsState, TodoState });
 export default useStore;

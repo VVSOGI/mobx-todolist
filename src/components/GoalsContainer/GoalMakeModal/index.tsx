@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Button, Modal, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useStore from "../../../store";
 
 const ModalContainer = styled.div`
@@ -52,12 +52,12 @@ interface Props {
   handleClose: () => void;
 }
 
-export default function TodoListMakeModal({ open, handleClose }: Props) {
-  const { todosState } = useStore();
+export default function GoalMakeModal({ open, handleClose }: Props) {
+  const { GoalsState } = useStore();
   const [title, setTitle] = useState("");
 
   const handleCreate = () => {
-    todosState.handleMakeNewList(title);
+    GoalsState.handleMakeNewList(title);
     handleClose();
   };
 

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import TodoContainer from "/src/components/TodoLists";
+import GoalsContainer from "../../components/GoalsContainer";
 import Todo from "/src/components/Todo";
 
 const TotalContainer = styled.div`
@@ -14,7 +14,7 @@ const TotalContainer = styled.div`
 function Main() {
   return (
     <TotalContainer>
-      <TodoContainer />
+      <GoalsContainer />
       <Todo />
     </TotalContainer>
   );

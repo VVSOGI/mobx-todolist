@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
-import { Button, Modal, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
-import TodoListMakeModal from "../TodoListMakeModal";
+import GoalMakeModal from "../GoalMakeModal";
 
 const MakeButtonContainer = styled(Button)`
   width: 100%;
@@ -31,14 +31,14 @@ const Icon = styled(AddIcon)`
   transform: rotateZ(0deg);
 `;
 
-export default function TodoMaker() {
+export default function GoalMaker() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <>
-      <TodoListMakeModal open={open} handleClose={handleClose} />
+      <GoalMakeModal open={open} handleClose={handleClose} />
       <MakeButtonContainer variant="outlined" onClick={handleOpen}>
         Make Business
         <Icon></Icon>
