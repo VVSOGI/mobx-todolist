@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { observer } from "mobx-react-lite";
-import { useState } from "react";
 import useStore from "../../../store";
 import TodoMove from "../TodoMove";
 
@@ -11,28 +10,21 @@ const TotalContainer = styled.div`
   overflow: scroll;
 `;
 
-function TodoTotalList() {
-  const [open, setOpen] = useState(false);
-  const { todosState } = useStore();
-  const { activeDelete, havingTodoList, handleDeleteList, handleEnterTodo } =
-    todosState;
+function Goals() {
+  const { GoalsState } = useStore();
+  const { activeDelete, goals, handleDeleteList, handleEnterTodo } = GoalsState;
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const handlePageMove = (id: number) => handleEnterTodo(id);
 
   return (
     <TotalContainer>
-      {havingTodoList.map(({ id, date, title }) => {
+      {goals.map(({ id, goal_date, goal_title }) => {
         return (
           <TodoMove
             key={id}
             id={id}
-            title={title}
-            date={date}
-            open={open}
-            handleOpen={handleOpen}
-            handleClose={handleClose}
+            title={goal_title}
+            date={goal_date}
             handleDelete={handleDeleteList}
             handlePageMove={handlePageMove}
             activeDelete={activeDelete}
@@ -43,4 +35,4 @@ function TodoTotalList() {
   );
 }
 
-export default observer(TodoTotalList);
+export default observer(Goals);

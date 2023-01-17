@@ -1,8 +1,6 @@
 import styled from "@emotion/styled";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-
-import React from "react";
-import { TodoList } from "../../../store/todos";
+import { GoalsType } from "../../../store/goals";
 
 const TotalContainer = styled.div`
   position: relative;
@@ -48,15 +46,15 @@ const CreationDate = styled.span`
 `;
 
 interface Props {
-  choiceTodo: TodoList | undefined;
+  choiceGoals: GoalsType | undefined;
   handleExitTodo: () => number;
 }
 
-export default function Title({ choiceTodo, handleExitTodo }: Props) {
+export default function Title({ choiceGoals, handleExitTodo }: Props) {
   return (
     <TotalContainer>
-      {choiceTodo?.title}
-      <CreationDate>{choiceTodo?.date}</CreationDate>
+      {choiceGoals?.goal_title}
+      <CreationDate>{choiceGoals?.goal_date}</CreationDate>
       <MoveBackContainer onClick={handleExitTodo}>
         <MoveBack />
       </MoveBackContainer>

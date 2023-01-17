@@ -44,14 +44,11 @@ const Line = styled.div<LineProps>`
 
 interface Props {
   color: Colors;
-  handleAddTodo: (
-    todoText: string,
-    userId: string,
-    color: Colors
-  ) => TodoContentType[];
+  enterGoal: number;
+  handleAddTodo: (todoText: string, goalId: number, color: Colors) => void;
 }
 
-export default function MakeTodo({ color, handleAddTodo }: Props) {
+export default function MakeTodo({ color, enterGoal, handleAddTodo }: Props) {
   const [todo, setTodo] = useState("");
 
   return (
@@ -66,7 +63,7 @@ export default function MakeTodo({ color, handleAddTodo }: Props) {
       <button
         onClick={() => {
           setTodo("");
-          handleAddTodo(todo, "test", color);
+          handleAddTodo(todo, enterGoal, color);
         }}
       >
         POST

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Button, Modal } from "@mui/material";
 import { observer } from "mobx-react-lite";
-import { TodoList } from "../../../store/todos";
+import { useState } from "react";
 
 interface MoveTodoPageProps {
   activedelete: boolean;
@@ -74,10 +74,7 @@ interface Props {
   title: string;
   date: string;
   activeDelete: boolean;
-  open: boolean;
-  handleOpen: () => void;
-  handleClose: () => void;
-  handleDelete: (id: number) => TodoList[];
+  handleDelete: (id: number) => any;
   handlePageMove: (id: number) => number;
 }
 
@@ -86,12 +83,13 @@ function TodoMove({
   title,
   date,
   activeDelete,
-  open,
-  handleOpen,
-  handleClose,
   handleDelete,
   handlePageMove,
 }: Props) {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <>
       <MoveTodoPage

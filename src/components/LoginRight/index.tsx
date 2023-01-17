@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import { UsersState } from "/src/store/users";
+import { getCookie } from "/src/utils/cookies";
 
 const RightContainer = styled.div`
   position: relative;
@@ -17,9 +18,10 @@ const RightContainer = styled.div`
 `;
 
 function LoginRight() {
-  const { isLogin, handleUserSignIn, handleUserSignUp } = UsersState;
+  const { handleCheckToken, handleUserSignIn, handleUserSignUp } = UsersState;
 
   const [id, setId] = useState("");
+  const [token, setToken] = useState(getCookie("accessToken"));
   const [password, setPassword] = useState("");
   const [checkAccess, setCheckAccess] = useState(false);
   const [changeMode, setChangeMode] = useState(false);
@@ -61,8 +63,8 @@ function LoginRight() {
   };
 
   useEffect(() => {
-    console.log(isLogin);
-  }, [isLogin]);
+    handleCheckToken(navigate);
+  }, [token]);
 
   useEffect(() => {
     if (checkAccess) {

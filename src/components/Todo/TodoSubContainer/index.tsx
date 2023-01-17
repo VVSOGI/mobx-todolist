@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { observer } from "mobx-react-lite";
+import { v4 } from "uuid";
 import { TodoState } from "/src/store/todo";
 import { Colors } from "/src/types";
 
@@ -51,6 +52,7 @@ function TodoSubContainer() {
         {colors.map((color) => {
           return (
             <Circle
+              key={v4()}
               onClick={() => {
                 handleColorChange(color);
               }}

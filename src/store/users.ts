@@ -1,9 +1,11 @@
 import axios from "axios";
 import { action, makeObservable, observable } from "mobx";
+import { NavigateFunction } from "react-router-dom";
+import { getCookie, setCookie } from "../utils/cookies";
 
 export class Users {
-  private token: string = "";
   isLogin: boolean = false;
+  token: string = getCookie("accessToken");
 
   constructor() {
     makeObservable(this, {
@@ -13,18 +15,37 @@ export class Users {
     });
   }
 
+  handleCheckToken = async (navigate: NavigateFunction) => {
+    try {
+      await axios.get(`${import.meta.env.VITE_URL}/auth`, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      });
+      navigate("/main");
+    } catch (e) {}
+  };
+
   handleUserSignIn = async (email: string, password: string) => {
     try {
-      const { data } = await axios.post(
+      const { data: token } = await axios.post(
         `${import.meta.env.VITE_URL}/auth/signin`,
         {
           email,
           password,
+        },
+        {
+          withCredentials: true,
         }
       );
-      console.log(data);
 
-      // this.isLogin = true;
+      setCookie("accessToken", token, {
+        secure: true,
+        sameSite: "strict",
+      });
+
+      this.isLogin = true;
       return this.isLogin;
     } catch (e) {
       return;

@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
-import TodoContainer from "/src/components/TodoLists";
+import { useState } from "react";
+import GoalsContainer from "../../components/GoalsContainer";
 import Todo from "/src/components/Todo";
+import { getCookie } from "/src/utils/cookies";
 
 const TotalContainer = styled.div`
   width: 100%;
@@ -12,10 +14,12 @@ const TotalContainer = styled.div`
 `;
 
 function Main() {
+  const [token, setToken] = useState(getCookie("accessToken"));
+
   return (
     <TotalContainer>
-      <TodoContainer />
-      <Todo />
+      <GoalsContainer />
+      <Todo token={token} />
     </TotalContainer>
   );
 }
