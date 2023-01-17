@@ -7,7 +7,6 @@ import ActiveDelete from "./ActiveDelete";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "/src/utils/cookies";
-import { useCookies } from "react-cookie";
 
 interface TotalContainerProps {
   enterGoal: number;

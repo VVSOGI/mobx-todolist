@@ -1,10 +1,9 @@
 export interface TodoContentType {
   id: number | string;
-  todoText: string;
+  todolist_contents: string;
   isCheckedTodo: boolean;
-  color?: Colors;
-  date?: Date;
-  userId: string;
+  todolist_color?: Colors;
+  todolist_date?: Date;
 }
 
 export type Colors =

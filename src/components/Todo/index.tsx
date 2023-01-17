@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import { GoalsState } from "../../store/goals";
+import { GoalsState, GoalsType } from "../../store/goals";
 import Title from "./Title";
 import TodoMainContainer from "./TodoMainContainer";
 import TodoSubContainer from "./TodoSubContainer";
@@ -35,10 +35,22 @@ const Main = styled.div`
   overflow: hidden;
 `;
 
-function Todo() {
+interface Props {
+  token: string;
+}
+
+function Todo({ token }: Props) {
   const [loading, setLoading] = useState(false);
   const { enterGoal, choiceGoals, handleExitTodo } = GoalsState;
-  const { todos } = TodoState;
+  const { todos, handleGetTodo, handleSetToken } = TodoState;
+
+  useEffect(() => {
+    if (enterGoal) {
+      const { id } = choiceGoals as GoalsType;
+      handleGetTodo(token, id);
+      handleSetToken(token);
+    }
+  }, [choiceGoals, enterGoal]);
 
   useEffect(() => {
     const main = document.getElementById("main");

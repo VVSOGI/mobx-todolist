@@ -6,7 +6,7 @@ import TodoContent from "./TodoContent";
 import { ReactSortable } from "react-sortablejs";
 import { forwardRef, useEffect, useState } from "react";
 import { toJS } from "mobx";
-import { getCookie } from "/src/utils/cookies";
+import { GoalsState } from "/src/store/goals";
 
 const MainContainer = styled.div`
   flex: 3;
@@ -40,6 +40,7 @@ function TodoMainContainer() {
     handleCheckTodo,
     handleDeleteTodo,
   } = TodoState;
+  const { enterGoal } = GoalsState;
   const [todoList, setTodoList] = useState(toJS(todos));
 
   useEffect(() => {
@@ -58,8 +59,8 @@ function TodoMainContainer() {
             <TodoContent
               key={data.id}
               id={data.id}
-              color={data.color || "#ea3232"}
-              todoText={data.todoText}
+              color={data.todolist_color || "#ea3232"}
+              todoText={data.todolist_contents}
               isCheckedTodo={data.isCheckedTodo}
               handleCheck={handleCheckTodo}
               handleDelete={handleDeleteTodo}
@@ -67,7 +68,11 @@ function TodoMainContainer() {
           );
         })}
       </ReactSortable>
-      <MakeTodo color={color} handleAddTodo={handleAddTodo} />
+      <MakeTodo
+        color={color}
+        enterGoal={enterGoal}
+        handleAddTodo={handleAddTodo}
+      />
     </MainContainer>
   );
 }

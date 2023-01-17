@@ -1,29 +1,13 @@
 import { Colors, TodoContentType } from "/src/types";
 import { action, makeObservable, observable, runInAction } from "mobx";
-import { v4 } from "uuid";
 import axios from "axios";
-import { getCookie } from "../utils/cookies";
-
-const mock: TodoContentType[] = [
-  {
-    id: 1,
-    todoText: "test",
-    isCheckedTodo: false,
-    userId: "benny",
-  },
-  {
-    id: 2,
-    todoText: "test2",
-    isCheckedTodo: false,
-    userId: "benny",
-  },
-];
 
 export class Todo {
   todos: TodoContentType[] = [];
   color: Colors = "#ea3232";
+  token = "";
 
-  constructor(mock: TodoContentType[]) {
+  constructor() {
     makeObservable(this, {
       todos: observable,
       color: observable,
@@ -33,8 +17,21 @@ export class Todo {
       handleCheckTodo: action,
       handleColorChange: action,
     });
-    this.todos = mock;
+    this.todos = [];
   }
+
+  handleGetTodo = async (token: string, goalId: number) => {
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_URL}/todolist/${goalId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    this.todos = data;
+  };
 
   handleSetTodo = (todos: TodoContentType[]) => {
     runInAction(() => {
@@ -42,38 +39,65 @@ export class Todo {
     });
   };
 
-  handleAddTodo = (
-    todoText: string,
-    userId: string,
+  handleAddTodo = async (
+    contents: string,
+    goalId: number,
     color: Colors = "#ea3232"
   ) => {
-    const newTodo: TodoContentType = {
-      id: v4(),
-      todoText,
-      userId,
-      isCheckedTodo: false,
-      color,
-    };
-    this.todos.push(newTodo);
-    return this.todos;
-  };
-
-  handleDeleteTodo = (id: number | string) => {
-    return (this.todos = this.todos.filter((todo) => todo.id !== id));
-  };
-
-  handleCheckTodo = (id: number | string) => {
-    return (this.todos = this.todos.map((todo) => {
-      if (todo.id === id) {
-        return Object.assign(todo, (todo.isCheckedTodo = !todo.isCheckedTodo));
+    await axios.post(
+      `${import.meta.env.VITE_URL}/todolist/`,
+      {
+        contents,
+        goalId,
+        color,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
       }
-      return todo;
-    }));
+    );
+    await this.handleGetTodo(this.token, goalId);
+  };
+
+  handleDeleteTodo = async (id: number | string) => {
+    try {
+      const { data: goalId } = await axios.delete(
+        `${import.meta.env.VITE_URL}/todolist/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        }
+      );
+
+      this.handleGetTodo(this.token, goalId);
+    } catch (e) {}
+  };
+
+  handleCheckTodo = async (id: number | string) => {
+    try {
+      const { data } = await axios.patch(
+        `${import.meta.env.VITE_URL}/todolist/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        }
+      );
+      const goalId = data[0].goal_id;
+      this.handleGetTodo(this.token, goalId);
+    } catch (e) {}
   };
 
   handleColorChange = (color: Colors) => {
     this.color = color;
   };
+
+  handleSetToken = (token: string) => {
+    this.token = token;
+  };
 }
 
-export const TodoState = new Todo(mock);
+export const TodoState = new Todo();
