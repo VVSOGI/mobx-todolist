@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
-import GoalMakeModal from "../GoalMakeModal";
+import GoalMakeModal from "./GoalMakeModal";
 
 const MakeButtonContainer = styled(Button)`
   width: 100%;
@@ -25,7 +25,7 @@ const MakeButtonContainer = styled(Button)`
   }
 `;
 
-const Icon = styled(AddIcon)`
+const GoalMakeIcon = styled(AddIcon)`
   transition: 0.2s;
   color: #212121d4;
   transform: rotateZ(0deg);
@@ -41,7 +41,7 @@ export default function GoalMaker() {
       <GoalMakeModal open={open} handleClose={handleClose} />
       <MakeButtonContainer variant="outlined" onClick={handleOpen}>
         Make Business
-        <Icon></Icon>
+        <GoalMakeIcon />
       </MakeButtonContainer>
     </>
   );

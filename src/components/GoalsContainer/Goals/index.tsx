@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { observer } from "mobx-react-lite";
 import useStore from "../../../store";
-import TodoMove from "../TodoMove";
+import TodoMove from "./TodoMove";
 
 const TotalContainer = styled.div`
   position: relative;
