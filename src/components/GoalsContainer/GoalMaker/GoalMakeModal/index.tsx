@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Button, Modal, TextField } from "@mui/material";
 import { useState } from "react";
-import useStore from "../../../store";
+import useStore from "../../../../store";
 
 const ModalContainer = styled.div`
   display: flex;

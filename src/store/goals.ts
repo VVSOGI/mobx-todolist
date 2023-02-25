@@ -28,7 +28,7 @@ export class Goals {
       handleMakeNewList: action,
       handleModifyList: action,
       handleActiveDelete: action,
-      handleActiveDeleteFalse: action,
+      handleActiveDeleteDisabled: action,
       handleEnterTodo: action,
       handleExitTodo: action,
       handleSetToken: action,
@@ -86,7 +86,7 @@ export class Goals {
     // });
   };
 
-  handleActiveDeleteFalse = () => {
+  handleActiveDeleteDisabled = () => {
     return (this.activeDelete = false);
   };
 

@@ -52,7 +52,7 @@ function GoalsContainer() {
 
   useEffect(() => {
     if (GoalsState.goals.length === 0) {
-      GoalsState.handleActiveDeleteFalse();
+      GoalsState.handleActiveDeleteDisabled();
     }
   }, [GoalsState.goals.length]);
 
